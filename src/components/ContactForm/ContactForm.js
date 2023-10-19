@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { nanoid } from 'nanoid';
 import { FormBtn, FormStyle } from './ContactFormStyled';
-import { addContact } from 'redux/contactSlice';
+import { addContact } from '../../redux/contactSlice';
+
 
 const ContactForm = () => {
   const [name, setName] = useState('');
