@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/contactslice';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactFilter from '../ContactFilter/ContactFilter';
 import ContactList from '../ContactList/ContactList';
-import GlobalStyle from '../GlobalStyles';
+import {GlobalStyle} from '../GlobalStyles';
+import { deleteContact } from 'redux/contactSlice';
 
 function App() {
   const contacts = useSelector(state => state.contacts.contacts);

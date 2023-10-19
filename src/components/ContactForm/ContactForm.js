@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+
 import { nanoid } from 'nanoid';
 import { FormBtn, FormStyle } from './ContactFormStyled';
+import { addContact } from 'redux/contactSlice';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'number') {
+      setNumber(value);
+    }
+  };
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -40,7 +50,7 @@ const ContactForm = () => {
           name="name"
           value={name}
           onChange={handleChange}
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zAЗа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces."
           required
         />
