@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { nanoid } from 'nanoid';
 import { FormBtn, FormStyle } from './ContactFormStyled';
-import { addContact } from '../../redux/contactSlice';
-
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -12,7 +9,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
 
-  const handleChange = (evt) => {
+  const handleChange = evt => {
     const { name, value } = evt.target;
     if (name === 'name') {
       setName(value);
