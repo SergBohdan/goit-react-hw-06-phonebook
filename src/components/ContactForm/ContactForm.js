@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { FormBtn, FormStyle } from './ContactFormStyled';
+import { addContact, getContacts } from 'redux/contactSlice';
 
 const ContactForm = () => {
-  const [name, setName] = useState('');
+  const [contactName, setContactName] = useState(''); 
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(getContacts);
 
   const handleChange = evt => {
     const { name, value } = evt.target;
-    if (name === 'name') {
-      setName(value);
+    if (name === 'contactName') {
+      setContactName(value); 
     } else if (name === 'number') {
       setNumber(value);
     }
@@ -20,22 +21,20 @@ const ContactForm = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    if (!name || !number) {
-      alert('Name and number are required.');
+
+    if (contacts.some(({ name }) => name === contactName)) {
+      window.alert(`${contactName} is already in your contacts`);
       return;
     }
+    dispatch(
+      addContact({
+        id: nanoid(),
+        name: contactName,
+        number,
+      })
+    );
 
-    if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
-
-    dispatch(addContact({ id: nanoid(), name, number }));
-    setName('');
+    setContactName('');
     setNumber('');
   };
 
@@ -45,10 +44,10 @@ const ContactForm = () => {
         Name:
         <input
           type="text"
-          name="name"
-          value={name}
+          name="contactName"
+          value={contactName} 
           onChange={handleChange}
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zAЗа-яА-Я]*)*$"
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces."
           required
         />

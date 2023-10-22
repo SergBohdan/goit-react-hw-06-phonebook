@@ -1,17 +1,21 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFilter } from '../../redux/filterSlice';
+import { setFilter, getFilter } from '../../redux/filterSlice';
 
 const ContactFilter = () => {
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
+
+  const onChange = evt => {
+    dispatch(setFilter(evt.target.value));
+  };
 
   return (
     <input
       type="text"
+      name={filter}
       placeholder="Search contacts"
       value={filter}
-      onChange={evt => dispatch(updateFilter(evt.target.value))}
+      onChange={onChange}
     />
   );
 };
