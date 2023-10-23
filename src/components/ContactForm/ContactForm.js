@@ -12,11 +12,18 @@ const ContactForm = () => {
   const contacts = useSelector(getContacts);
 
   const handleChange = evt => {
-    const { name, value } = evt.target;
-    if (name === 'contactName') {
-      setContactName(value); 
-    } else if (name === 'number') {
-      setNumber(value);
+    const { value, name } = evt.target;
+
+    switch (name) {
+      case 'name':
+        setContactName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        return;
     }
   };
 

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, getFilter } from '../../redux/filterSlice';
+import { getFilter, setFilter } from '../../redux/filterSlice';
 
 const ContactFilter = () => {
   const filter = useSelector(getFilter);
@@ -10,6 +10,7 @@ const ContactFilter = () => {
   };
 
   return (
+    <label>
     <input
       type="text"
       name={filter}
@@ -17,6 +18,7 @@ const ContactFilter = () => {
       value={filter}
       onChange={onChange}
     />
+    </label>
   );
 };
 
