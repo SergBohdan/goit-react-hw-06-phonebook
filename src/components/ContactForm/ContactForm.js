@@ -4,9 +4,8 @@ import { nanoid } from 'nanoid';
 import { FormBtn, FormStyle } from './ContactFormStyled';
 import { addContact, getContacts } from '../../redux/contactslice';
 
-
 const ContactForm = () => {
-  const [contactName, setContactName] = useState(''); 
+  const [contactName, setContactName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
@@ -15,7 +14,7 @@ const ContactForm = () => {
     const { value, name } = evt.target;
 
     switch (name) {
-      case 'name':
+      case 'contactName':
         setContactName(value);
         break;
       case 'number':
@@ -53,7 +52,7 @@ const ContactForm = () => {
         <input
           type="text"
           name="contactName"
-          value={contactName} 
+          value={contactName}
           onChange={handleChange}
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces."
